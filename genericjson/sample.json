@@ -1,0 +1,23 @@
+{
+    "Browser": {
+        "Text1": "das ist text 1",
+        "Text2": "das ist text 2",
+        "Text3": "das ist text 3"
+    },
+    "Controller": {
+        "SelectedCommands": ["A", "B", "C"]
+    },
+    "Mandant": "SDTS",
+    "mandant": "sdts",
+    "Vertrag": {
+        "Referenznummer": "P1234",
+        "Anschaffungswert": 12355.33,
+        "Sonderzahlung": 400.50,
+        "Angebotsdatum": "2018-07-20T14:33:21.1000"
+    },
+    "Objekte": [
+        {"Bezeichnung": "7 Golfschläger", "Preis": 125.11},
+        {"Bezeichnung": "7 Zwerge", "Preis": 312.00},
+        {"Bezeichnung": "7 Taschen", "Preis": 822.22}
+    ]
+}

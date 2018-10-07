@@ -1,0 +1,6 @@
+SAMPLE=1
+INT=2
+DOT=3
+WS=4
+'Sample'=1
+'.'=3

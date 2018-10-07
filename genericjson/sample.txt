@@ -1,0 +1,37 @@
+Das ist das Template
+--------------------
+
+Mandant  {{.Mandant}} / mandant {{.mandant}}
+User     {{Username}} aus dem Environment
+Language {{Language}}
+--------------------------------------------- Browser
+Text1={{.Browser.Text1}}
+Text2={{.Browser.Text3}}
+Text3={{.Browser.Text2}}
+
+--------------------------------------------- Vertrag
+{{with .Vertrag -}}
+Referenznummer:    {{.Referenznummer}}
+Anschaffungswert:  {{.Anschaffungswert}}
+Sonderzahlung:     {{.Sonderzahlung}}
+Angebotsdatum:     {{.Angebotsdatum}}
+{{end}}
+
+--------------------------------------------- Objekte
+Name:  Bezeichnung Preis
+{{range .Objekte -}}
+{{Name}}: {{.Bezeichnung}} {{.Preis}}
+{{end}}
+
+{{define "tx" -}}
+  {{.Label}}({{.Property}}): [input name="{{.Name}}" value="{{.Value}}"]
+{{- end}}
+--------------------------------------------- Named Objekte
+Name:  Bezeichnung Preis
+{{range .Objekte -}}
+{{template "tx" bind . "Bezeichnung" "Bez"}}
+{{template "tx" bind . "Preis" "Netto"}}
+{{template "tx" bind . "Unknown" "unbekannt"}}
+
+{{end -}}
+
