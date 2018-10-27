@@ -52,3 +52,6 @@ Temporary Items
 # linux binaries
 /casconfig/casconfig
 /md2html/md2html
+
+# antlr4
+.antlr
