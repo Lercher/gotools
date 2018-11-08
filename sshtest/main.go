@@ -2,11 +2,12 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"time"
 
-	_ "github.com/pkg/sftp"
+	"github.com/pkg/sftp"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -59,5 +60,19 @@ func main() {
 	}
 	log.Println("completed", cmd)
 
-	// sh, err := sftp.NewClient(con)
+	// now upload a simple file
+	sh, err := sftp.NewClient(con)
+	if err != nil {
+		log.Fatal("opening sftp:", err)
+	}
+	fn := "hello_world_sftp.txt"
+	f, err := sh.Create(fn)
+	if err != nil {
+		log.Fatal(err)
+	}
+	n, err := fmt.Fprintf(f, "Hello sftp world, it's %v\nAnd here are some umlauts: äöüÄÖÜß\n", time.Now())
+	if err != nil {
+		log.Fatal("writing", fn, ":", err)
+	}
+	log.Println("written", n, "bytes")
 }
