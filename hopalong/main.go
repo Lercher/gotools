@@ -16,5 +16,5 @@ func main() {
 		log.Println("runtime:", time.Now().Sub(t))
 	}()
 
-	hopPNG(os.Stdout, 1920, 1080, 5000000)
+	hopPNG(os.Stdout, 1920, 1080, 100000)
 }
