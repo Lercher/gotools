@@ -1,6 +1,6 @@
 package main
 
-// go build && ./hopalong >x.png && rm hopalong
+// go get && go build && ./hopalong -w 300 -h 300 -o x.png && rm hopalong
 
 import (
 	"flag"
@@ -14,6 +14,7 @@ var (
 	flagHeight    = flag.Int("h", 1920, "height of the png image")
 	flagRounds    = flag.Int("n", 5000000, "number of plotted orbit pixels")
 	flagNextColor = flag.Int("c", 1000, "change color every this number of iterations")
+	flagFile      = flag.String("o", "", "output the png image to this `file`, if missing or -, stdout is used")
 )
 
 func main() {
@@ -25,5 +26,14 @@ func main() {
 		log.Println("runtime:", time.Now().Sub(t))
 	}()
 
-	hopPNG(os.Stdout, *flagWidth, *flagHeight, *flagRounds, *flagNextColor)
+	o := os.Stdout
+	if *flagFile != "" && *flagFile != "-" {
+		f, err := os.Create(*flagFile)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		defer f.Close()
+		o = f
+	}
+	hopPNG(o, *flagWidth, *flagHeight, *flagRounds, *flagNextColor)
 }
