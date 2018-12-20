@@ -1,7 +1,10 @@
 package main
 
+// go build && ./hopalong >x.png && rm hopalong
+
 import (
 	"log"
+	"os"
 	"time"
 )
 
@@ -12,8 +15,6 @@ func main() {
 	defer func() {
 		log.Println("runtime:", time.Now().Sub(t))
 	}()
-	h := &hop{}
-	h.randomizeABC()
-	h.rounds(1000000)
-	log.Println(*h)
+
+	hopPNG(os.Stdout, 1920, 1080, 5000000)
 }
