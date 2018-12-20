@@ -12,6 +12,8 @@ func (t *transform) keepAspectRatio() {
 	t.y.factor = f
 }
 
-func (t *transform) tr(x, y float64) (int, int) {
-	return t.x.tr(x), t.y.tr(y)
+func (t *transform) tr(x, y float64) (int, int, bool) {
+	ix, okx := t.x.tr(x) 
+	iy, oky := t.y.tr(y) 
+	return ix, iy, okx && oky
 }

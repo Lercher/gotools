@@ -9,10 +9,10 @@ func (b *box) enclose(x, y float64) {
 	b.y.enclose(y)
 }
 
-func (b *box) transform(w, h int) *transform {
+func (b *box) transform(w, h int, quadrant1 bool) *transform {
 	t := &transform{
-		x: b.x.linetransform(w),
-		y: b.y.linetransform(h),
+		x: b.x.linetransform(w, quadrant1),
+		y: b.y.linetransform(h, quadrant1),
 	}
 	t.keepAspectRatio()
 	return t

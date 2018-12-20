@@ -9,16 +9,16 @@ import (
 	"github.com/usedbytes/hsv"
 )
 
-func hopPNG(w io.Writer, width, height, rounds, nextColor int) {
-	img := hopimg(width, height, rounds, nextColor)
+func hopPNG(w io.Writer, width, height, rounds, nextColor int, quadrant1 bool) {
+	img := hopimg(width, height, rounds, nextColor, quadrant1)
 	png.Encode(w, img)
 }
 
-func hopimg(width, height, rounds, nextColor int) *image.NRGBA {
+func hopimg(width, height, rounds, nextColor int, quadrant1 bool) *image.NRGBA {
 	h := &hop{}
 	h.randomizeABC()
 	h.bounds(rounds)
-	t := h.transform(width, height)
+	t := h.transform(width, height, quadrant1)
 	h.reset()
 
 	rect := image.Rect(0, 0, width, height)
@@ -34,8 +34,10 @@ func hopimg(width, height, rounds, nextColor int) *image.NRGBA {
 			ci++
 			c = hsv.HSVColor{H: uint16(ci % 360), S: 255, V: 255}
 		}
-		x, y := t.tr(h.x, h.y)
-		img.Set(x, y, c)
+		x, y, ok := t.tr(h.x, h.y)
+		if ok {
+			img.Set(x, height-y-1, c)
+		}
 	})
 
 	return img
