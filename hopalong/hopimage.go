@@ -16,7 +16,7 @@ func hopPNG(w io.Writer, width, height, rounds, nextColor int, quadrant1 bool) {
 
 func hopimg(width, height, rounds, nextColor int, quadrant1 bool) *image.NRGBA {
 	h := &hop{}
-	h.randomizeABC()
+	rmartin1(h) //randomize
 	h.bounds(rounds)
 	t := h.transform(width, height, quadrant1)
 	h.reset()
