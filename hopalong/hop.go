@@ -1,9 +1,10 @@
 package main
 
 type hop struct {
+	hopf       hopfunc
 	a, b, c, d float64 // constant parameters
-	x, y    float64 // iteration coordinates
-	box             // initial bounding box is only the origin at 0,0
+	x, y       float64 // iteration coordinates
+	box                // initial bounding box is only the origin at 0,0
 }
 
 func (h *hop) reset() {
@@ -20,8 +21,7 @@ func (h *hop) bounds(n int) {
 
 func (h *hop) rounds(n int, f func()) {
 	for i := 0; i < n; i++ {
-		martin1(h)
+		h.hopf(h)
 		f()
 	}
 }
-

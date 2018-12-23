@@ -1,9 +1,10 @@
 package main
 
-// go get && go build && ./hopalong -w 300 -h 300 -q1 -o x.png && rm hopalong
+// go get && go build && ./hopalong -w 300 -h 300 -f 6 -q1 -o x.png && rm hopalong
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -11,6 +12,7 @@ import (
 
 var (
 	flagWidth     = flag.Int("w", 1920, "width of the png image")
+	flagFunc      = flag.Int("f", 0, fmt.Sprintf("use this hop function in the range 0..%d", len(hopfuncs)))
 	flagHeight    = flag.Int("h", 1920, "height of the png image")
 	flagRounds    = flag.Int("n", 5000000, "number of plotted orbit pixels")
 	flagNextColor = flag.Int("c", 1000, "change color every this number of iterations")
@@ -21,6 +23,10 @@ var (
 func main() {
 	log.Println("This is HopAlong, (c) 2018 by Martin Lercher")
 	flag.Parse()
+
+	if *flagFunc <0 || len(hopfuncs) <= *flagFunc {
+		log.Fatalln("-f", *flagFunc, "out of range")
+	}
 
 	t := time.Now()
 	defer func() {
@@ -36,5 +42,5 @@ func main() {
 		defer f.Close()
 		o = f
 	}
-	hopPNG(o, *flagWidth, *flagHeight, *flagRounds, *flagNextColor, *flagQ1)
+	hopPNG(o,*flagFunc, *flagWidth, *flagHeight, *flagRounds, *flagNextColor, *flagQ1)
 }

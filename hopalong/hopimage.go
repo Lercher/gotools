@@ -9,14 +9,15 @@ import (
 	"github.com/usedbytes/hsv"
 )
 
-func hopPNG(w io.Writer, width, height, rounds, nextColor int, quadrant1 bool) {
-	img := hopimg(width, height, rounds, nextColor, quadrant1)
+func hopPNG(w io.Writer, idx, width, height, rounds, nextColor int, quadrant1 bool) {
+	img := hopimg(idx, width, height, rounds, nextColor, quadrant1)
 	png.Encode(w, img)
 }
 
-func hopimg(width, height, rounds, nextColor int, quadrant1 bool) *image.NRGBA {
+func hopimg(idx, width, height, rounds, nextColor int, quadrant1 bool) *image.NRGBA {
 	h := &hop{}
-	rmartin1(h) //randomize
+	h.hopf = hopfuncs[idx]
+	randfuncs[idx](h) //randomize
 	h.bounds(rounds)
 	t := h.transform(width, height, quadrant1)
 	h.reset()
