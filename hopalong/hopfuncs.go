@@ -42,7 +42,7 @@ func rmartin2(h *hop) {
 
 func rejk1(h *hop) {
 	h.a = ran(0, 500)
-	h.b = ran(0, 40)
+	h.b = ran(0, 0.4)
 	h.c = ran(10, 110)
 }
 
