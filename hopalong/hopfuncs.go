@@ -1,6 +1,8 @@
 package main
 
-import "math"
+import (
+	"math"
+)
 
 type hopfunc func(h *hop)
 
@@ -137,7 +139,8 @@ func ejk5(h *hop) {
 }
 
 func ejk6(h *hop) {
-	h.x, h.y = h.y-math.Asin(math.Floor(h.b*h.x)), h.a-h.x
+	s := h.b * h.x
+	h.x, h.y = h.y-math.Asin(s-math.Floor(s)), h.a-h.x
 }
 
 func rrr1(h *hop) {
