@@ -39,11 +39,12 @@ type
 Type of the message. [need not be a header, it's the 2nd send parameter]
 */
 
-const q = "SampleQueue"
+const q = "Sample.Queue"
+const host = "item-s69570:61613"
 
 func main() {
 	con, err := stomp.Dial(
-		"tcp", "item-s69570:61613",
+		"tcp", host,
 		stomp.ConnOpt.Header("client-id", "hostname.sample"),
 	)
 	if err != nil {
@@ -55,7 +56,7 @@ func main() {
 	log.Println("connected to", con.Server())
 	log.Println("session", con.Session())
 	log.Println()
-	
+
 	err = con.Send(
 		q,
 		"string",
