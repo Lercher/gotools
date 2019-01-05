@@ -1,12 +1,14 @@
 package main
 
 // go get && go run main.go
+
 // see https://godoc.org/github.com/go-stomp/stomp
+// and http://activemq.apache.org/stomp.html
 
 import (
 	"log"
 
-	"github.com/jjeffery/stomp"
+	"github.com/go-stomp/stomp"
 )
 
 func main() {
@@ -20,7 +22,13 @@ func main() {
 	log.Println("connected to", con.Server())
 	log.Println("session", con.Session())
 
-	err = con.Send("SampleQueue", "string", []byte("lorem ipsum"), stomp.SendOpt.Receipt)
+	err = con.Send(
+		"SampleQueue",
+		"string",
+		[]byte("lorem ipsum"),
+		stomp.SendOpt.Receipt,
+		stomp.SendOpt.Header("persistent", "true"),
+	)
 	if err != nil {
 		log.Fatalln("send:", err)
 	}
