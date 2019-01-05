@@ -1,6 +1,7 @@
 package main
 
 // go get && go run main.go
+// see https://godoc.org/github.com/go-stomp/stomp
 
 import (
 	"log"
@@ -9,20 +10,22 @@ import (
 )
 
 func main() {
-	conn, err := stomp.Dial("tcp", "item-s69570:61613")
+	con, err := stomp.Dial("tcp", "item-s69570:61613")
 	if err != nil {
 		log.Fatalln("dial:", err)
 	}
-	log.Println("STOMP version", conn.Version())
-	log.Println("connected to", conn.Server())
-	log.Println("session", conn.Session())
+	defer con.Disconnect()
 
-	err = conn.Send("SampleQueue", "string", []byte("lorem ipsum"), stomp.SendOpt.Receipt)
+	log.Println("STOMP version", con.Version())
+	log.Println("connected to", con.Server())
+	log.Println("session", con.Session())
+
+	err = con.Send("SampleQueue", "string", []byte("lorem ipsum"), stomp.SendOpt.Receipt)
 	if err != nil {
 		log.Fatalln("send:", err)
 	}
 
-	err = conn.Disconnect()
+	err = con.Disconnect()
 	if err != nil {
 		log.Fatalln("disconnect:", err)
 	}
