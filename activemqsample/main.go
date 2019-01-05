@@ -7,6 +7,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"github.com/go-stomp/stomp"
 )
@@ -38,9 +39,11 @@ type
 Type of the message. [need not be a header, it's the 2nd send parameter]
 */
 
+const q = "SampleQueue"
+
 func main() {
 	con, err := stomp.Dial(
-		"tcp", "item-s69570:61613", 
+		"tcp", "item-s69570:61613",
 		stomp.ConnOpt.Header("client-id", "hostname.sample"),
 	)
 	if err != nil {
@@ -51,9 +54,10 @@ func main() {
 	log.Println("STOMP version", con.Version())
 	log.Println("connected to", con.Server())
 	log.Println("session", con.Session())
-
+	log.Println()
+	
 	err = con.Send(
-		"SampleQueue",
+		q,
 		"string",
 		[]byte("lorem ipsum"),
 		stomp.SendOpt.Receipt,
@@ -64,8 +68,52 @@ func main() {
 		log.Fatalln("send:", err)
 	}
 
+	// now receive something:
+	sub, err := con.Subscribe(
+		q,
+		stomp.AckClient,
+		stomp.SubscribeOpt.Header("activemq.prefetchSize", "1"),
+	)
+	if err != nil {
+		log.Fatalln("subscribe:", err)
+	}
+
+loop:
+	for {
+		select {
+		case msg := <-sub.C:
+			if msg.Err != nil {
+				log.Println("msg:", msg.Err)
+				break
+			}
+
+			l := msg.Header.Len()
+			for i := 0; i < l; i++ {
+				k, v := msg.Header.GetAt(i)
+				log.Println(k, v)
+			}
+			log.Println("content-type:", msg.ContentType)
+			log.Println("destination: ", msg.Destination)
+			log.Println("content:     ", string(msg.Body))
+			log.Println()
+
+			err = con.Ack(msg)
+			if msg.Err != nil {
+				log.Println("ack:", msg.Err)
+				break
+			}
+		case <-time.After(3 * time.Second):
+			break loop
+		}
+	}
+	err = sub.Unsubscribe()
+	if err != nil {
+		log.Fatalln("unsubscribe:", err)
+	}
+
 	err = con.Disconnect()
 	if err != nil {
 		log.Fatalln("disconnect:", err)
 	}
+	log.Println("disconnected")
 }
