@@ -1,0 +1,48 @@
+<html>
+
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+          <title>Upload</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="col-sm-6">
+
+            <h2>Ihr Antrag P123456 - Händlerseite</h2>
+            <img src="https://zxing.org/w/chart?cht=qr&chs=350x350&chld=L&choe=UTF-8&chl=MECARD%3AN%3AP123456%3B%3B" />
+            <p>Bitte übergeben Sie diesen QR-Code an Ihren Kunden.</p>
+        </div>
+        <div class="col-sm-6">
+
+            <h2>Ihr Antrag P123456 - Endkundenseite</h2>
+            <pre>            Kunde:     Clemenz Mücke
+            Objekt:    BMW 750i
+            Lieferant: BMW Niederlassung München</pre>
+
+            <p>
+                Zur Vervollständigung der Unterlagen
+                bitten wir Sie freundlich, diese
+                Dokumente abzufotographieren
+                und hier hochzuladen:
+            </p>
+            <h2>G+V</h2>
+            <p>
+                <input type="file" name="guv" />
+                <input type="submit" />
+            </p>
+
+            <h2>Selbstauskunft</h2>
+            <p>
+                <input type="file" name="Selbstauskunft" />
+                <input type="submit" />
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
