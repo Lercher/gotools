@@ -49,6 +49,9 @@ func main() {
 		if err != nil {
 			log.Println(emlfile, err)
 		}
+		if i > 10 {
+			break
+		}
 	}
 }
 
