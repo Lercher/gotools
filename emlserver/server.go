@@ -22,7 +22,8 @@ type server struct {
 }
 
 func (s *server) loadTemplates() {
-	s.templates = template.Must(template.ParseGlob("*.html"))
+	t := template.New("")
+	s.templates = template.Must(t.Parse(sitehtml))
 }
 
 func (s *server) serveFile(w http.ResponseWriter, filename string) {
@@ -80,6 +81,9 @@ func (s *server) list(id string) (*mailbox, error) {
 	for _, fi := range entries {
 		emlfile := filepath.Join(*flagDropDir, fi.Name())
 		item, err := parse(emlfile, id)
+		if err == errDontCare {
+			continue
+		}
 		if err != nil {
 			return nil, err
 		}
@@ -95,12 +99,18 @@ func (s *server) list(id string) (*mailbox, error) {
 	return mb, nil
 }
 
+var errDontCare = fmt.Errorf("don't care")
+
 func parse(emlfile, id string) (*item, error) {
 	r, err := os.Open(emlfile)
 	if err != nil {
 		return nil, err
 	}
 	defer r.Close()
+	stat, err := r.Stat()
+	if err != nil || stat.IsDir() {
+		return nil, errDontCare
+	}
 
 	m, err := mail.ReadMessage(r)
 	if err != nil {
