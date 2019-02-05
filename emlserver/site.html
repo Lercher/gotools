@@ -36,6 +36,9 @@
     Betreff: <b>{{.Subject}}</b>
 </div>
 <pre style="font-size: 72%; white-space: pre-wrap;">{{.Body}}</pre>
+<p>
+    <a href="?download={{.ID}}" class="btn btn-primary btn-sm">Download</a>
+</p>
 {{end}}{{end}}
 
 <head>
@@ -47,7 +50,7 @@
 </head>
 
 <body>
-    <div class="container-flex">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-3">{{template "items" .}}</div>
             <div class="col-9">{{template "body" .Selected}}</div>
