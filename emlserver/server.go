@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"html/template"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -24,7 +25,26 @@ func (s *server) loadTemplates() {
 	s.templates = template.Must(template.ParseGlob("*.html"))
 }
 
+func (s *server) serveFile(w http.ResponseWriter, filename string) {
+	fn := filepath.Base(filename) // no subdir or ..
+	full := filepath.Join(s.directory, fn)
+	f, err := os.Open(full)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusNotFound)
+		return
+	}
+	w.Header().Set("Content-Type", "message/rfc822")
+	w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="%s"`, fn))
+	defer f.Close()
+	io.Copy(w, f)
+}
+
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	download := r.URL.Query().Get("download")
+	if download != "" {
+		s.serveFile(w, download)
+		return
+	}
 	id := r.URL.Query().Get("id")
 	mb, err := s.list(id)
 	if err != nil {
