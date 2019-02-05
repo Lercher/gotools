@@ -32,6 +32,13 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	if mb.Selected == nil && len(mb.All) > 0 {
+		id = mb.All[0].ID
+		mb.Selected, _ = parse(filepath.Join(s.directory, id), id)
+		mb.All[0] = mb.Selected
+	}
+
 	err = s.templates.Execute(w, mb)
 	if err != nil {
 		log.Println(err)
