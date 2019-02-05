@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+{{define "items"}}
+<ul class="list-group">
+    {{range .All}}
+    {{template "item" .}}
+    {{- end}}
+</ul>
+{{end}}
+
+{{define "item"}}
+<li class="list-group-item{{if .Body}} active{{end}}">
+    <a href="?id={{.ID}}">
+        <div>
+            &#9872;
+            {{.To}}
+        </div>
+        <div>
+            &#8701;
+            {{.From}}
+        </div>
+        <div>
+            &#8599;
+            {{.Date}}
+        </div>
+        <div>{{.Subject}}</div>
+    </a>
+</li>
+{{end}}
+
+{{define "body"}}
+<div>
+    &#9872;
+    {{.To}}
+    &#8701;
+    {{.From}}
+</div>
+<div>
+    &#8599;
+    {{.Date}}
+</div>
+<div>
+    Betreff: {{.Subject}}
+</div>
+<pre>{{.Body}}</pre>
+{{end}}
+
+<head>
+    <title>Generic Mailbox</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-4">{{template "items" .}}</div>
+            <div class="col-8">{{template "body" .Selected}}</div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -31,7 +31,8 @@ func main() {
 	if !stat.IsDir() {
 		log.Fatalln(*flagDropDir, "must be a directory containing 0..n *.eml files")
 	}
-	srv := &server{*flagRoot, *flagDropDir}
+	srv := &server{*flagRoot, *flagDropDir, nil}
+	srv.loadTemplates()
 	ht := fmt.Sprintf(":%d", *flagPort)
 	log.Println("serving *.eml files from", srv.directory, "on", ht, srv.prefix())
 

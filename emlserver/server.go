@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -10,11 +11,17 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"time"
 )
 
 type server struct {
 	rootpath  string
 	directory string
+	templates *template.Template
+}
+
+func (s *server) loadTemplates() {
+	s.templates = template.Must(template.ParseGlob("*.html"))
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -25,7 +32,12 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Fprintln(w, "OK", mb)
+	err = s.templates.Execute(w, mb)
+	if err != nil {
+		log.Println(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func (s *server) prefix() string {
@@ -37,10 +49,6 @@ func (s *server) list(id string) (*mailbox, error) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	// sort files desc
-	sort.Slice(entries, func(i, j int) bool {
-		return entries[i].ModTime().Unix() > entries[j].ModTime().Unix()
-	})
 	mb := &mailbox{}
 	for _, fi := range entries {
 		emlfile := filepath.Join(*flagDropDir, fi.Name())
@@ -53,6 +61,10 @@ func (s *server) list(id string) (*mailbox, error) {
 		}
 		mb.All = append(mb.All, item)
 	}
+	// sort files desc
+	sort.Slice(mb.All, func(i, j int) bool {
+		return mb.All[i].D.Unix() > mb.All[j].D.Unix()
+	})
 	return mb, nil
 }
 
@@ -73,6 +85,7 @@ func parse(emlfile, id string) (*item, error) {
 	header := m.Header
 	item.From = header.Get("From")
 	item.Date = header.Get("Date")
+	item.D, _ = time.Parse("2 Jan 2006 15:04:05 -0700", item.Date) // Date: 4 Feb 2019 19:18:26 +0100
 	item.To = header.Get("To")
 	subj := header.Get("Subject")
 	subj, err = worddecoder.DecodeHeader(subj)
