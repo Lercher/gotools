@@ -21,16 +21,79 @@
             padding-top: 10ex;
         }
     </style>
+
+    <style>
+.breadcrumbx { 
+  list-style: none; 
+  overflow: hidden;
+  margin-top: 1ex; 
+}
+.breadcrumbx li { 
+  float: left; 
+  padding: 1ex 0 1ex 6ex;
+  background: brown; /* fallback color */
+  background: hsla(34,85%,35%,1); 
+  position: relative; 
+  display: block;
+  float: left;
+  font-weight: bold;
+}
+.breadcrumbx li::after { 
+  content: " "; 
+  display: block; 
+  width: 0; 
+  height: 0;
+  border-top: 50px solid transparent; /* Go big on the size, and let overflow hide */
+  border-bottom: 50px solid transparent;
+  border-left: 30px solid hsla(34,85%,35%,1);
+  position: absolute;
+  top: 50%;
+  margin-top: -50px; 
+  left: 100%;
+  z-index: 12; 
+}
+.breadcrumbx li::before { 
+  content: " "; 
+  display: block; 
+  width: 0; 
+  height: 0;
+  border-top: 50px solid transparent;       
+  border-bottom: 50px solid transparent;
+  border-left: 30px solid white;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px; 
+  margin-left: 2px;
+  left: 100%;
+  z-index: 11; 
+}
+.breadcrumbx li:last-child ::after { 
+  border: 0; 
+}
+.breadcrumbx li.active {
+    color: yellow;
+    font-style: italic;
+}
+    </style>
+
 </head>
 
 <body style="background-color: #eed">
     <div class="container-fluid">
         <div class="row sticky">
-            <div class="col-sm-6">
-                <h3>My Header</h3>
-            </div>
-            <div class="col-sm-6">
-                <h3>My 2nd Header</h3>
+            <h2>My Header</h2>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="breadcrumbx">
+                        <li>Frontend</li>
+                        <li>Wallet</li>
+                        <li class="active">Ankauf</li>
+                        <li>Bestellung</li>
+                        <li>Übergabe</li>
+                        <li>Backoffice</li>
+                    </ul>      
+                    https://css-tricks.com/triangle-breadcrumbs/  
             </div>
         </div>
         <div class="row">
