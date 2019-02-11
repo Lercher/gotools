@@ -1,60 +1,100 @@
 <html>
 
 <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-          <title>Upload</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Upload</title>
+    <style>
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #447;
+            color: #eed;
+            z-index: 100;
+        }
+
+        .sticky+.row {
+            padding-top: 10ex;
+        }
+    </style>
 </head>
 
 <body style="background-color: #eed">
     <div class="container-fluid">
-        <div class="col-sm-6">
-
-            <h2>Ihr Antrag P123456 - Händlerseite</h2>
-            <img src="https://zxing.org/w/chart?cht=qr&chs=350x350&chld=L&choe=UTF-8&chl=MECARD%3AN%3AP123456%3B%3B" />
-            <p>Bitte übergeben Sie diesen QR-Code an Ihren Kunden.</p>
+        <div class="row sticky">
+            <div class="col-sm-6">
+                <h3>My Header</h3>
+            </div>
+            <div class="col-sm-6">
+                <h3>My 2nd Header</h3>
+            </div>
         </div>
-        <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Ihr Antrag P123456 - Händlerseite</h2>
+                https://www.w3schools.com/howto/howto_js_sticky_header.asp
+                <img
+                    src="https://zxing.org/w/chart?cht=qr&chs=350x350&chld=L&choe=UTF-8&chl=MECARD%3AN%3AP123456%3B%3B" />
+                <p>Bitte übergeben Sie diesen QR-Code an Ihren Kunden.</p>
+            </div>
+            <div class="col-sm-6">
 
-            <h2>Ihr Antrag P123456 - Endkundenseite</h2>
-            <pre>Kunde:     Clemenz Mücke
-Objekt:    BMW 750i
-Lieferant: BMW Niederlassung München</pre>
+                <h2>Ihr Antrag P123456 - Endkundenseite</h2>
+                <pre>
+                    Kunde:     Clemenz Mücke
+                    Objekt:    BMW 750i
+                    Lieferant: BMW Niederlassung München</pre>
 
-<p>
-                Zur Vervollständigung der Unterlagen
-                bitten wir Sie freundlich, diese
-                Dokumente abzufotographieren
-                und hier hochzuladen:
-            </p>
-            <h2>G+V</h2>
-            <p>
-                <input type="file" name="guv" />
-                <input type="submit" />
-            </p>
+                <p>
+                    Zur Vervollständigung der Unterlagen
+                    bitten wir Sie freundlich, diese
+                    Dokumente abzufotographieren
+                    und hier hochzuladen:
+                </p>
+                <h2>G+V</h2>
+                <p>
+                    <input type="file" name="guv" />
+                </p>
 
-            <h2>Selbstauskunft</h2>
-            <p>
-                <input type="file" name="Selbstauskunft" />
-                <input type="submit" />
-            </p>
+                <h2>Selbstauskunft</h2>
+                <p>
+                    <input type="file" name="Selbstauskunft" />
+                </p>
 
-            <h2>Shields</h2>
-            <p><img src="https://img.shields.io/badge/Leasingantrag-Signieren-important.svg?logo=Diaspora" style="height: 3ex; width: auto;"/> <img src="https://img.shields.io/badge/%C3%9Cbernahmebest%C3%A4tigung-Folgt-inactive.svg?logo=Diaspora" style="height: 3ex; width: auto;"/></p>
-            <p><img src="https://img.shields.io/badge/Leasingantrag-Signiert-success.svg?logo=Diaspora" style="height: 3ex; width: auto;"/> <img src="https://img.shields.io/badge/%C3%9Cbernahmebest%C3%A4tigung-Folgt-inactive.svg?logo=Diaspora" style="height: 3ex; width: auto;"/></p>
-            <p><img src="https://img.shields.io/badge/Leasingantrag-Signiert-success.svg?logo=Diaspora" style="height: 3ex; width: auto;"/> <img src="https://img.shields.io/badge/%C3%9Cbernahmebest%C3%A4tigung-Signieren-important.svg?logo=Diaspora" style="height: 3ex; width: auto;"/></p>
-            <p><img src="https://img.shields.io/badge/Leasingantrag-Signiert-success.svg?logo=Diaspora" style="height: 3ex; width: auto;"/> <img src="https://img.shields.io/badge/Übernahmebestätigung-Signiert-success.svg?logo=Diaspora" style="height: 3ex; width: auto;"/></p>
-            <br/>
-            <p><img src="https://img.shields.io/badge/Gehaltsnachweis-Bitte%20uploaden-important.svg?logo=pinboard" style="height: 3ex; width: auto;"/></p>
-            <p><img src="https://img.shields.io/badge/Gehaltsnachweis-Bitte%20pr%C3%BCfen-critical.svg?logo=pinboard" style="height: 3ex; width: auto;"/></p>
-            <p><img src="https://img.shields.io/badge/Gehaltsnachweis-OK-success.svg?logo=pinboard" style="height: 3ex; width: auto;"/></p>
-            <br/>
-            <p><img src="https://img.shields.io/badge/Captive%20Angebot-Frontend-informational.svg" style="height: 3ex; width: auto;"/></p>
-            <br/>
-            <p>Siehe <a href="https://shields.io/" target="_new">https://shields.io/</a></p>
+                <h2>Shields</h2>
+                <p><img src="https://img.shields.io/badge/Leasingantrag-Signieren-important.svg?logo=Diaspora"
+                        style="height: 3ex; width: auto;" /> <img
+                        src="https://img.shields.io/badge/%C3%9Cbernahmebest%C3%A4tigung-Folgt-inactive.svg?logo=Diaspora"
+                        style="height: 3ex; width: auto;" /></p>
+                <p><img src="https://img.shields.io/badge/Leasingantrag-Signiert-success.svg?logo=Diaspora"
+                        style="height: 3ex; width: auto;" /> <img
+                        src="https://img.shields.io/badge/%C3%9Cbernahmebest%C3%A4tigung-Folgt-inactive.svg?logo=Diaspora"
+                        style="height: 3ex; width: auto;" /></p>
+                <p><img src="https://img.shields.io/badge/Leasingantrag-Signiert-success.svg?logo=Diaspora"
+                        style="height: 3ex; width: auto;" /> <img
+                        src="https://img.shields.io/badge/%C3%9Cbernahmebest%C3%A4tigung-Signieren-important.svg?logo=Diaspora"
+                        style="height: 3ex; width: auto;" /></p>
+                <p><img src="https://img.shields.io/badge/Leasingantrag-Signiert-success.svg?logo=Diaspora"
+                        style="height: 3ex; width: auto;" /> <img
+                        src="https://img.shields.io/badge/Übernahmebestätigung-Signiert-success.svg?logo=Diaspora"
+                        style="height: 3ex; width: auto;" /></p>
+                <br />
+                <p><img src="https://img.shields.io/badge/Gehaltsnachweis-Bitte%20uploaden-important.svg?logo=pinboard"
+                        style="height: 3ex; width: auto;" /></p>
+                <p><img src="https://img.shields.io/badge/Gehaltsnachweis-Bitte%20pr%C3%BCfen-critical.svg?logo=pinboard"
+                        style="height: 3ex; width: auto;" /></p>
+                <p><img src="https://img.shields.io/badge/Gehaltsnachweis-OK-success.svg?logo=pinboard"
+                        style="height: 3ex; width: auto;" /></p>
+                <br />
+                <p><img src="https://img.shields.io/badge/Captive%20Angebot-Frontend-informational.svg"
+                        style="height: 3ex; width: auto;" /></p>
+                <br />
+                <p>Siehe <a href="https://shields.io/" target="_new">https://shields.io/</a></p>
+            </div>
         </div>
     </div>
 </body>
