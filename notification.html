@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Notify </title>
+
+    <script>
+        function createNotification(title) {
+            var title = "You have new mail";
+
+            // Let's check if the browser supports notifications
+            if (!"Notification" in window) {
+                console.log("This browser does not support notifications.");
+            }
+
+            // Let's check if the user is okay to get some notification
+            else if (Notification.permission === "granted") {
+                // If it's okay let's create a notification
+
+                var img = '/to-do-notifications/img/icon-128.png';
+                var notification = new Notification('Your favourite email program', { body: title, icon: img });
+                window.navigator.vibrate(500);
+                setTimeout(notification.close.bind(notification), 6000);
+            }
+
+            // Otherwise, we need to ask the user for permission
+            // Note, Chrome does not implement the permission static property
+            // So we have to check for NOT 'denied' instead of 'default'
+            else if (Notification.permission !== 'denied') {
+                Notification.requestPermission(function (permission) {
+
+                    // Whatever the user answers, we make sure Chrome stores the information
+                    if (!('permission' in Notification)) {
+                        Notification.permission = permission;
+                    }
+
+                    // If the user is okay, let's create a notification
+                    if (permission === "granted") {
+                        var img = '/to-do-notifications/img/icon-128.png';
+                        var notification = new Notification('Your favourite email program', { body: title, icon: img });
+                        window.navigator.vibrate(500);
+                        setTimeout(notification.close.bind(notification), 6000);
+                    }
+                });
+            }
+        }
+
+        $(function() {
+            let $n = $("#n");
+            $n.on("click", createNotification);
+
+            let $d = $("#d");
+            $d.on("click", function() {
+                setTimeout(createNotification, 5000);
+            });
+        });
+    </script>
+</head>
+
+<body style="background-color: #eed">
+    <div class="container-fluid">
+        <div class="col-sm-6">
+            <h2>Notify me demo</h2>
+            see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API/Using_the_Notifications_API">Using the Notifications API</a>
+        </div>
+        <div class="col-sm-6">
+            The notification will only work in Chrome, 
+            if this page was loaded from an https resource.
+            <button id="n">Notify me</button>
+            <button id="d">Notify me after 5s</button>
+        </div>
+    </div>
+</body>
+
+</html>
