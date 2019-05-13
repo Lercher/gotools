@@ -6,6 +6,12 @@ package main
 // curl -d 'hello world 3' 'http://127.0.0.1:4151/pub?topic=foo.bar'
 // http://127.0.0.1:4171/
 
+//// NSQ - https://nsq.io/
+// cd ~/nsq-1.1.0.linux-amd64.go1.10.3/bin/
+// ./nsqlookupd 
+// ./nsqd --lookupd-tcp-address=127.0.0.1:4160
+// ./nsqadmin --lookupd-http-address=127.0.0.1:4161
+
 import (
 	"flag"
 	"fmt"
