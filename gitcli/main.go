@@ -35,6 +35,9 @@ func main() {
 	//
 	//   error creating SSH agent: "SSH agent requested but Pageant not running"
 	//
+	// credits to:
+	// https://github.com/wstrange at https://github.com/src-d/go-git/issues/550#issuecomment-323182885
+	//
 	s := filepath.Join(os.Getenv("USERPROFILE"), ".ssh", "id_rsa")
 	sshKey, err := ioutil.ReadFile(s)
 	if err != nil {
