@@ -11,3 +11,5 @@ require (
 	golang.org/x/crypto v0.0.0-20190404164418-38d8ce5564a5
 	gopkg.in/src-d/go-git.v4 v4.10.0
 )
+
+go 1.13
