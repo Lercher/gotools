@@ -1,0 +1,8 @@
+{{define "master"}}
+I'm the master with data {{.}}
+And this is data.T named {{.Text}}: {{(.T.Execute .W .)}}
+{{end}}
+
+{{define "inner" -}}
+This is the inner with data {{.Text}}
+{{end}}
