@@ -55,6 +55,7 @@ func main() {
 
 	// using TLS, see also https://groups.google.com/g/nsq-users/c/PkkPN9z7gPc
 	cfg.TlsV1 = true
+	cfg.DialTimeout = 10 * time.Second
 	cert, err := tls.LoadX509KeyPair(*flagCert, *flagKey)
 	if err != nil {
 		log.Fatalln("loading TLS key/cert files:", err)
