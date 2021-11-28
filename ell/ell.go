@@ -3,12 +3,21 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 )
 
 func main() {
 	log.Println("This is ell, (c) 2021 by Martin Lercher")
 
-	printwalk(3, 120, 5e-2)
+	// printwalk(3, 120, 5e-2)
+	o, err := os.Create("img.png")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer o.Close()
+
+	ellPNG(o, 3, 1920, 3e-2)
+	log.Println("done")
 }
 
 func printwalk(w float64, steps int, epsilon float64) {
@@ -44,5 +53,5 @@ func isZeroAt(x, y, epsilon float64) (float64, bool) {
 }
 
 func f0(x, y float64) float64 {
-	return -y*y + x*x*x - x + 0.45
+	return -y*y + x*x*x - x + 0.42
 }
