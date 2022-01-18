@@ -1,4 +1,4 @@
-// Code generated from /home/lercher/go/src/github.com/lercher/gotools/antlr4sample/Sample.g4 by ANTLR 4.7.1. DO NOT EDIT.
+// Code generated from c:\git\src\github.com\lercher\gotools\antlr4sample\Sample.g4 by ANTLR 4.8. DO NOT EDIT.
 
 package parser // Sample
 
