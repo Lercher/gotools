@@ -8,7 +8,8 @@ require (
 	github.com/nsqio/go-nsq v1.0.7
 	github.com/pkg/sftp v1.10.0
 	github.com/usedbytes/hsv v0.0.0-20170730102510-c0565042a95a
-	golang.org/x/crypto v0.0.0-20190404164418-38d8ce5564a5
+	golang.design/x/clipboard v0.6.0 // indirect
+	golang.org/x/crypto v0.0.0-20191011191535-87dc89f01550
 	gopkg.in/src-d/go-git.v4 v4.10.0
 )
 

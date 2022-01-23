@@ -58,3 +58,6 @@ Temporary Items
 
 # x509 key files
 *.key
+
+# downloads
+\imgdl\output
