@@ -19,8 +19,8 @@ import (
 )
 
 var (
-	flagOut  = flag.String("o", "./output", "directory to put files into. It will be created if it won't exist")
-	flagStop = flag.Bool("stoponerror", true, "stop loop on first http get error")
+	flagOut  = flag.String("o", "./output", "directory to put files into. It will be created if it won't exist.")
+	flagStop = flag.Bool("stoponerror", true, "skip all gets after the first http get error, resume gets after {{waitclip}}")
 )
 
 var (
@@ -30,21 +30,25 @@ var (
 
 func main() {
 	log.Println("This is imgdl, (C) 2022 by Martin Lercher")
-	log.Println("It http GETs web ressources provided by a sequence of urls")
-	log.Println("URLs are provided by a Go text template called 'main' line by line")
-	log.Println("and responses are saved flattened in the outpupt directory (-o)")
+	log.Println("It http GETs web ressources with guessable URLs which are provided by a Go template called 'main'")
+	log.Println("producing a sequence of such URLs line by line. The template needs to be stored in a file which is the 1st arg to this cmd.")
+	log.Println("Response bodies are saved under the URLs file name only (aka 'flattened') in the output directory (-o).")
 	log.Println(``)
-	log.Println(`{{define "main"}}{{range $i := intRange 1 12}}file_{{$i}}.png{{end}}{{end}} might be handy here`)
-	log.Println(`{{$star := star "abc***def**ghi" "123abc789de234"}} -> ["abc" "de"] by position`)
-	log.Println(`{{$cliboardtext := clip}} -> read clipboard`)
-	log.Println(`{{waitclip}} -> busy wait for clipboard text to change`)
+	log.Println(`Basic template file content:`)
+	log.Println(`  {{define "main"}}{{range $i := intRange 1 12}}https://abc.xyz/img/file_{{$i}}.png{{end}}{{end}}`)
+	log.Println(``)
+	log.Println(`Helper template functions:`)
+	log.Println(`  waitclip - {{waitclip}} -> busy wait for clipboard text to change, outputs nothing`)
+	log.Println(`  clip     - {{$text := clip}} -> read clipboard text`)
+	log.Println(`  star     - {{$star := star "abc***def**ghi" "123aaa789bb234"}} -> extracts ["aaa" "bb"] by position into $star`)
+	log.Println(``)
 	log.Println(``)
 
 	flag.Parse()
 
 	if flag.NArg() != 1 {
 		flag.Usage()
-		fmt.Println("\ntemplate container file name missing")
+		fmt.Println("\ntemplate 'main' container file name missing or too many arguments")
 		os.Exit(1)
 	}
 
