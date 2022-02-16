@@ -1,0 +1,9 @@
+{{define "main" -}}
+{{range $w := intRange 1 600 -}}
+    {{waitclip -}}
+    {{$s := star "https://static1.mangayeh.com/manga/chapter/60191d05a566934fb06d0ba4/************************/kono_subarashii_sekai_ni_shukufuku_o_**_1.jpg" clip -}}    
+    {{range $i := intRange 1 60 -}}
+                https://static1.mangayeh.com/manga/chapter/60191d05a566934fb06d0ba4/{{index $s 0            }}/kono_subarashii_sekai_ni_shukufuku_o_{{index $s 1}}_{{$i}}.jpg
+    {{end -}}
+{{end -}}
+{{end -}}
