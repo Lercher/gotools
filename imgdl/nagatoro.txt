@@ -1,7 +1,7 @@
 {{define "main" -}}
 {{range $w := intRange 1 600 -}}
     {{waitclip -}}
-    {{$s := star "https://static1.mangayeh.com/manga/chapter/60191d0da566934fb06d0be9/************************/please_dont_bully_me_nagatoro_**_1.jpg" clip -}}    
+    {{$s := star "https://static1.mangayeh.com/manga/chapter/60191d0da566934fb06d0be9/************************/please_dont_bully_me_nagatoro_***_1.jpg" clip -}}    
     {{range $i := intRange 1 60 -}}
         https://static1.mangayeh.com/manga/chapter/60191d0da566934fb06d0be9/{{index $s 0}}/please_dont_bully_me_nagatoro_{{index $s 1}}_{{$i}}.jpg
     {{end -}}
