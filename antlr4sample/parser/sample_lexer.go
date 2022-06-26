@@ -13,7 +13,7 @@ import (
 var _ = fmt.Printf
 var _ = unicode.IsLetter
 
-var serializedLexerAtn = []uint16{
+var serializedLexerAtn = []int32{
 	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 2, 6, 35, 8,
 	1, 4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 3, 2, 3,
 	2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 7, 3, 23, 10, 3, 12, 3, 14,
@@ -32,7 +32,7 @@ var serializedLexerAtn = []uint16{
 }
 
 var lexerDeserializer = antlr.NewATNDeserializer(nil)
-var lexerAtn = lexerDeserializer.DeserializeFromUInt16(serializedLexerAtn)
+var lexerAtn = lexerDeserializer.Deserialize(serializedLexerAtn)
 
 var lexerChannelNames = []string{
 	"DEFAULT_TOKEN_CHANNEL", "HIDDEN",

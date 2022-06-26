@@ -15,14 +15,14 @@ var _ = fmt.Printf
 var _ = reflect.Copy
 var _ = strconv.Itoa
 
-var parserATN = []uint16{
+var parserATN = []int32{
 	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 6, 10, 4,
 	2, 9, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 8, 2,
 	4, 3, 2, 2, 2, 4, 5, 7, 3, 2, 2, 5, 6, 7, 4, 2, 2, 6, 7, 7, 5, 2, 2, 7,
 	8, 7, 2, 2, 3, 8, 3, 3, 2, 2, 2, 2,
 }
 var deserializer = antlr.NewATNDeserializer(nil)
-var deserializedATN = deserializer.DeserializeFromUInt16(parserATN)
+var deserializedATN = deserializer.Deserialize(parserATN)
 
 var literalNames = []string{
 	"", "'Sample'", "", "'.'",
