@@ -1,4 +1,4 @@
-// Code generated from c:\git\src\github.com\lercher\gotools\antlr4sample\Sample.g4 by ANTLR 4.8. DO NOT EDIT.
+// Code generated from c:\git\src\github.com\lercher\gotools\antlr4sample\Sample.g by ANTLR 4.9.2. DO NOT EDIT.
 
 package parser
 
@@ -13,7 +13,7 @@ import (
 var _ = fmt.Printf
 var _ = unicode.IsLetter
 
-var serializedLexerAtn = []int32{
+var serializedLexerAtn = []uint16{
 	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 2, 6, 35, 8,
 	1, 4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 3, 2, 3,
 	2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 7, 3, 23, 10, 3, 12, 3, 14,
@@ -30,9 +30,6 @@ var serializedLexerAtn = []int32{
 	3, 2, 2, 2, 31, 32, 9, 4, 2, 2, 32, 33, 3, 2, 2, 2, 33, 34, 8, 6, 2, 2,
 	34, 12, 3, 2, 2, 2, 4, 2, 24, 3, 2, 3, 2,
 }
-
-var lexerDeserializer = antlr.NewATNDeserializer(nil)
-var lexerAtn = lexerDeserializer.Deserialize(serializedLexerAtn)
 
 var lexerChannelNames = []string{
 	"DEFAULT_TOKEN_CHANNEL", "HIDDEN",
@@ -61,18 +58,20 @@ type SampleLexer struct {
 	// TODO: EOF string
 }
 
-var lexerDecisionToDFA = make([]*antlr.DFA, len(lexerAtn.DecisionToState))
-
-func init() {
+// NewSampleLexer produces a new lexer instance for the optional input antlr.CharStream.
+//
+// The *SampleLexer instance produced may be reused by calling the SetInputStream method.
+// The initial lexer configuration is expensive to construct, and the object is not thread-safe;
+// however, if used within a Golang sync.Pool, the construction cost amortizes well and the
+// objects can be used in a thread-safe manner.
+func NewSampleLexer(input antlr.CharStream) *SampleLexer {
+	l := new(SampleLexer)
+	lexerDeserializer := antlr.NewATNDeserializer(nil)
+	lexerAtn := lexerDeserializer.DeserializeFromUInt16(serializedLexerAtn)
+	lexerDecisionToDFA := make([]*antlr.DFA, len(lexerAtn.DecisionToState))
 	for index, ds := range lexerAtn.DecisionToState {
 		lexerDecisionToDFA[index] = antlr.NewDFA(ds, index)
 	}
-}
-
-func NewSampleLexer(input antlr.CharStream) *SampleLexer {
-
-	l := new(SampleLexer)
-
 	l.BaseLexer = antlr.NewBaseLexer(input)
 	l.Interpreter = antlr.NewLexerATNSimulator(l, lexerAtn, lexerDecisionToDFA, antlr.NewPredictionContextCache())
 
@@ -81,7 +80,7 @@ func NewSampleLexer(input antlr.CharStream) *SampleLexer {
 	l.RuleNames = lexerRuleNames
 	l.LiteralNames = lexerLiteralNames
 	l.SymbolicNames = lexerSymbolicNames
-	l.GrammarFileName = "Sample.g4"
+	l.GrammarFileName = "Sample.g"
 	// TODO: l.EOF = antlr.TokenEOF
 
 	return l

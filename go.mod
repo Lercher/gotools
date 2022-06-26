@@ -1,7 +1,7 @@
 module github.com/lercher/gotools
 
 require (
-	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20220625170237-e4cec2039bfb
+	github.com/antlr/antlr4 v0.0.0-20210311221813-5e5b6d35b418 // indirect
 	github.com/go-stomp/stomp v2.1.4+incompatible
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/nsqio/go-nsq v1.1.0

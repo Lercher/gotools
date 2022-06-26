@@ -1,4 +1,4 @@
-// Code generated from c:\git\src\github.com\lercher\gotools\antlr4sample\Sample.g4 by ANTLR 4.8. DO NOT EDIT.
+// Code generated from c:\git\src\github.com\lercher\gotools\antlr4sample\Sample.g by ANTLR 4.9.2. DO NOT EDIT.
 
 package parser // Sample
 
@@ -15,15 +15,12 @@ var _ = fmt.Printf
 var _ = reflect.Copy
 var _ = strconv.Itoa
 
-var parserATN = []int32{
+var parserATN = []uint16{
 	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 6, 10, 4,
 	2, 9, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 8, 2,
 	4, 3, 2, 2, 2, 4, 5, 7, 3, 2, 2, 5, 6, 7, 4, 2, 2, 6, 7, 7, 5, 2, 2, 7,
 	8, 7, 2, 2, 3, 8, 3, 3, 2, 2, 2, 2,
 }
-var deserializer = antlr.NewATNDeserializer(nil)
-var deserializedATN = deserializer.Deserialize(parserATN)
-
 var literalNames = []string{
 	"", "'Sample'", "", "'.'",
 }
@@ -34,28 +31,32 @@ var symbolicNames = []string{
 var ruleNames = []string{
 	"main",
 }
-var decisionToDFA = make([]*antlr.DFA, len(deserializedATN.DecisionToState))
-
-func init() {
-	for index, ds := range deserializedATN.DecisionToState {
-		decisionToDFA[index] = antlr.NewDFA(ds, index)
-	}
-}
 
 type SampleParser struct {
 	*antlr.BaseParser
 }
 
+// NewSampleParser produces a new parser instance for the optional input antlr.TokenStream.
+//
+// The *SampleParser instance produced may be reused by calling the SetInputStream method.
+// The initial parser configuration is expensive to construct, and the object is not thread-safe;
+// however, if used within a Golang sync.Pool, the construction cost amortizes well and the
+// objects can be used in a thread-safe manner.
 func NewSampleParser(input antlr.TokenStream) *SampleParser {
 	this := new(SampleParser)
-
+	deserializer := antlr.NewATNDeserializer(nil)
+	deserializedATN := deserializer.DeserializeFromUInt16(parserATN)
+	decisionToDFA := make([]*antlr.DFA, len(deserializedATN.DecisionToState))
+	for index, ds := range deserializedATN.DecisionToState {
+		decisionToDFA[index] = antlr.NewDFA(ds, index)
+	}
 	this.BaseParser = antlr.NewBaseParser(input)
 
 	this.Interpreter = antlr.NewParserATNSimulator(this, deserializedATN, decisionToDFA, antlr.NewPredictionContextCache())
 	this.RuleNames = ruleNames
 	this.LiteralNames = literalNames
 	this.SymbolicNames = symbolicNames
-	this.GrammarFileName = "Sample.g4"
+	this.GrammarFileName = "Sample.g"
 
 	return this
 }
