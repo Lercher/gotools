@@ -26,6 +26,7 @@ var (
 var (
 	clipver  = 0
 	lastclip = string(clipboard.Read(clipboard.FmtText))
+	lastfldr = ""
 )
 
 func main() {
@@ -41,6 +42,7 @@ func main() {
 	log.Println(`  waitclip - {{waitclip}} -> busy wait for clipboard text to change, outputs nothing`)
 	log.Println(`  clip     - {{$text := clip}} -> read clipboard text`)
 	log.Println(`  star     - {{$star := star "abc***def**ghi" "123aaa789bb234"}} -> extracts ["aaa" "bb"] by position into $star`)
+	log.Println(`  folder   - {{printf "xy..." $w | folder }} -> creates subfolder named xy... and puts downloads into it`)
 	log.Println(``)
 	log.Println(``)
 
@@ -57,8 +59,8 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	dir := *flagOut
-	err = os.MkdirAll(dir, 0777)
+	lastfldr = *flagOut
+	err = os.MkdirAll(lastfldr, 0777)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -86,7 +88,7 @@ func main() {
 		if u, err := url.Parse(line); err == nil {
 			cont := func() bool {
 				_, fn := path.Split(u.Path)
-				fullname := path.Join(dir, fn)
+				fullname := path.Join(lastfldr, fn)
 				fullname = filepath.FromSlash(fullname)
 				resp, err := http.Get(u.String())
 				if err != nil {
@@ -131,6 +133,11 @@ func main() {
 }
 
 var funcs = template.FuncMap{
+	"folder": func(fld string) error {
+		lastfldr = filepath.Join(*flagOut, fld)
+		log.Println("using folder:", lastfldr)
+		return os.MkdirAll(lastfldr, 0777)
+	},
 	"intRange": func(start, end int) []int {
 		n := end - start + 1
 		result := make([]int, n)
@@ -164,7 +171,7 @@ var funcs = template.FuncMap{
 	"clip": func() string {
 		return string(clipboard.Read(clipboard.FmtText))
 	},
-	"waitclip": func() string {		
+	"waitclip": func() string {
 		fmt.Print("Waiting for clipboard to change...")
 		for {
 			<-time.After(250 * time.Millisecond)

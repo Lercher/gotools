@@ -1,0 +1,12 @@
+{{define "main" -}}
+{{range $w := intRange 14 600 -}}
+    {{waitclip -}}
+    {{/* https://mangaclash.com/manga/liliths-cord/chapter-14/
+                  https://cdn.mangaclash.com/manga_5f0c0d7bc0253/08dbd2f40a0ddc75686f12519b75a93d/1.jpg */ -}}
+    {{$s := star "https://cdn.mangaclash.com/manga_5f0c0d7bc0253/********************************/*.jpg" clip -}}
+    {{printf "liliths-cord-%03v" $w | folder -}}
+    {{range $i := intRange 1 60 -}}
+                  https://cdn.mangaclash.com/manga_5f0c0d7bc0253/{{index $s 0                  }}/{{$i}}.jpg
+    {{end -}}
+{{end -}}
+{{end -}}
