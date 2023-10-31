@@ -60,4 +60,5 @@ Temporary Items
 *.key
 
 # downloads
-\imgdl\output
+/imgdl/output
+/mitmproxy/pervert-life-0003

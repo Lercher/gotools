@@ -1,0 +1,35 @@
+2023/10/30 18:19:26 incoming request: GET toonily.com /webtoon/pervert-life-0003/chapter-1/
+2023/10/30 18:17:35 incoming request: GET toonily.com /webtoon/pervert-life-0003/chapter-2/
+2023/10/30 18:12:59 incoming request: GET toonily.com /webtoon/pervert-life-0003/chapter-3/
+
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/01.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/02.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/03.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/04.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/05.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/06.jpg
+2023/10/30 18:13:00 target response for: GET toonily-1.disqus.com https://toonily-1.disqus.com:443/count.js 304 Not Modified
+2023/10/30 18:13:00 target response for: GET toonily-1.disqus.com https://toonily-1.disqus.com:443/embed.js 200 OK
+2023/10/30 18:13:00 CONNECT requested to disqus.com:443 (from 127.0.0.1:49595)
+2023/10/30 18:13:00 CONNECT requested to c.disquscdn.com:443 (from 127.0.0.1:49596)
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/06.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/01.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/04.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/03.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/05.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/02.jpg 200 OK
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/07.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/08.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/09.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/10.jpg
+
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/06.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/01.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/04.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/03.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/05.jpg 200 OK
+2023/10/30 18:13:00 target response for: GET cdn.toonily.com https://cdn.toonily.com:443/chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/02.jpg 200 OK
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/07.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/08.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/09.jpg
+2023/10/30 18:13:00 incoming request: GET cdn.toonily.com /chapters/manga_5d2c7fadbf429/b947937c16fea922884ab5c0595844e9/10.jpg

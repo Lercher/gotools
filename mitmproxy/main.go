@@ -17,7 +17,7 @@
 //
 //	Print the CA certificate and key storage location.
 //
-// mitmproxy -cakeyfile %localappdata%\mkcert\rootCA-key.pem -cacertfile %localappdata%\mkcert\rootCA.pem
+// go build && mitmproxy -cakeyfile %localappdata%\mkcert\rootCA-key.pem -cacertfile %localappdata%\mkcert\rootCA.pem
 package main
 
 import (
@@ -126,6 +126,7 @@ func loadX509KeyPair(certFile, keyFile string) (cert *x509.Certificate, key any,
 type mitmProxy struct {
 	caCert *x509.Certificate
 	caKey  any
+	proc   processor
 }
 
 // createMitmProxy creates a new MITM proxy. It should be passed the filenames
@@ -154,7 +155,7 @@ func (p *mitmProxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 // proxyConnect implements the MITM proxy for CONNECT tunnels.
 func (p *mitmProxy) proxyConnect(w http.ResponseWriter, proxyReq *http.Request) {
-	log.Printf("CONNECT requested to %v (from %v)", proxyReq.Host, proxyReq.RemoteAddr)
+	// log.Printf("CONNECT requested to %v (from %v)", proxyReq.Host, proxyReq.RemoteAddr)
 
 	// "Hijack" the client connection to get a TCP (or TLS) socket we can read
 	// and write arbitrary data to/from.
@@ -189,7 +190,8 @@ func (p *mitmProxy) proxyConnect(w http.ResponseWriter, proxyReq *http.Request) 
 	// tunnel. From this point on the client will assume it's connected directly
 	// to the target.
 	if _, err := clientConn.Write([]byte("HTTP/1.1 200 OK\r\n\r\n")); err != nil {
-		log.Fatal("error writing status to client:", err)
+		log.Println("error writing status to client:", err)
+		return
 	}
 
 	// Configure a new TLS server, pointing it at the client connection, using
@@ -226,7 +228,7 @@ func (p *mitmProxy) proxyConnect(w http.ResponseWriter, proxyReq *http.Request) 
 		}
 
 		// We can dump the request; log it, modify it...
-		log.Println("incoming request:", r.Method, r.Host, r.URL.String())
+		// log.Println("incoming request:", r.Method, r.Host, r.URL.String())
 		// if b, err := httputil.DumpRequest(r, false); err == nil {
 		//	log.Printf("incoming request:\n%s\n", string(b))
 		// }
@@ -241,15 +243,17 @@ func (p *mitmProxy) proxyConnect(w http.ResponseWriter, proxyReq *http.Request) 
 			log.Println("error sending request to target:", err)
 			break
 		}
-		log.Println("target response for:", r.Method, r.Host, r.URL.String(), resp.Status)
+		// log.Println("target response for:", r.Method, r.Host, r.URL.String(), resp.Status)
 		// if b, err := httputil.DumpResponse(resp, false); err == nil {
 		//	log.Printf("target response:\n%s\n", string(b))
 		// }
+		p.proc.send(r, resp)		
 		defer resp.Body.Close()
 
 		// Send the target server's response back to the client.
 		if err := resp.Write(tlsConn); err != nil {
 			log.Println("error writing response back:", err)
+			return
 		}
 	}
 }
@@ -281,9 +285,15 @@ func main() {
 	var addr = flag.String("addr", "127.0.0.1:9999", "proxy address")
 	caCertFile := flag.String("cacertfile", "", "certificate .pem file for trusted CA")
 	caKeyFile := flag.String("cakeyfile", "", "key .pem file for trusted CA")
+	ctrl := flag.String("control", "control.txt", "go template to control saving captured resources to files")
 	flag.Parse()
 
 	proxy := createMitmProxy(*caCertFile, *caKeyFile)
+
+	log.Println("using control template", *ctrl)
+	if err := proxy.proc.start(*ctrl); err != nil {
+		log.Fatalln("control:", err)
+	}
 
 	log.Println("Starting proxy server on", *addr)
 	if err := http.ListenAndServe(*addr, proxy); err != nil {

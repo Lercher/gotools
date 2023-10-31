@@ -1,0 +1,15 @@
+{{define "main"}}
+Ranging over the channel ...
+    {{range .}}
+        {{- if and (eq "toonily.com:443" .Request.URL.Host) (match "/webtoon/*/*/" .Request.URL.Path)}}
+        path match: {{foldern .Request.URL.Path 2}}{{"\n"}}
+        {{- end}}
+        {{- if and (eq "cdn.toonily.com:443" .Request.URL.Host) (match "/chapters/*/*/*.jpg" .Request.URL.Path)}}
+        chapters jpg match: {{$fn := splitfn .Request.URL.Path}}{{save $fn .Body}}{{"\n"}}
+        {{- end}}
+    {{- end}}
+{{end}}
+
+{{define "url" -}}
+    {{.Request.URL.Host}}{{.Request.URL.Path}}{{"\n"}}
+{{- end}}
