@@ -13,9 +13,7 @@
 //
 // go install filippo.io/mkcert@latest
 // mkcert -install
-// mkcert -CAROOT
-//
-//	Print the CA certificate and key storage location.
+// mkcert -CAROOT -> Print the CA certificate and key storage location.
 //
 // go build && mitmproxy -cakeyfile %localappdata%\mkcert\rootCA-key.pem -cacertfile %localappdata%\mkcert\rootCA.pem
 package main

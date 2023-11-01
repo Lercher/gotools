@@ -1,4 +1,13 @@
 {{define "main"}}
+go install filippo.io/mkcert@latest
+mkcert -install
+go build && mitmproxy -cakeyfile %localappdata%\mkcert\rootCA-key.pem -cacertfile %localappdata%\mkcert\rootCA.pem
+
+set proxy to 127.0.0.1 port 9999
+
+to serve images use:
+sfs -flat -path ...
+
 Ranging over the channel ...
     {{range .}}
         {{- if and (eq "toonily.com:443" .Request.URL.Host) (match "/webtoon/*/*/" .Request.URL.Path)}}
@@ -9,6 +18,7 @@ Ranging over the channel ...
         {{- end}}
     {{- end}}
 {{end}}
+
 
 {{define "url" -}}
     {{.Request.URL.Host}}{{.Request.URL.Path}}{{"\n"}}
