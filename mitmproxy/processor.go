@@ -106,7 +106,7 @@ func (p *processor) start(tplFile string) error {
 
 	p.c = make(chan rr, 1)
 	go func() {
-		err := t.ExecuteTemplate(log.Default().Writer(), "main", p.c)
+		err := t.ExecuteTemplate(os.Stdout, "main", p.c)
 		if err != nil {
 			log.Fatalln(err)
 		}

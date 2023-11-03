@@ -1,22 +1,21 @@
-{{define "main"}}
 go install filippo.io/mkcert@latest
 mkcert -install
 go build && mitmproxy -cakeyfile %localappdata%\mkcert\rootCA-key.pem -cacertfile %localappdata%\mkcert\rootCA.pem
 
-set proxy to 127.0.0.1 port 9999
+set proxy to 127.0.0.1 port 9999, then browse
 
-to serve images use:
-sfs -flat -path ...
+to serve images use: sfs -port :80 -flat -path ...
 
-Ranging over the channel ...
-    {{range .}}
-        {{- if and (eq "toonily.com:443" .Request.URL.Host) (match "/webtoon/*/*/" .Request.URL.Path)}}
-        path match: {{foldern .Request.URL.Path 2}}{{"\n"}}
-        {{- end}}
-        {{- if and (eq "cdn.toonily.com:443" .Request.URL.Host) (match "/chapters/*/*/*.jpg" .Request.URL.Path)}}
-        chapters jpg match: {{$fn := splitfn .Request.URL.Path}}{{save $fn .Body}}{{"\n"}}
-        {{- end}}
+{{define "main" -}}
+Ranging over the channel of request/responses ...
+{{- range .}}
+    {{- if and (eq "toonily.com:443"     .Request.URL.Host) (match "/webtoon/*/*/"       .Request.URL.Path)}}
+path match: {{foldern .Request.URL.Path 2}}{{"\n"}}
     {{- end}}
+    {{- if and (eq "cdn.toonily.com:443" .Request.URL.Host) (match "/chapters/*/*/*.jpg" .Request.URL.Path)}}
+    chapter jpg match: {{$fn := splitfn .Request.URL.Path}}{{save $fn .Body}}
+    {{- end}}
+{{- end}}
 {{end}}
 
 

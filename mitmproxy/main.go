@@ -238,7 +238,7 @@ func (p *mitmProxy) proxyConnect(w http.ResponseWriter, proxyReq *http.Request) 
 		// Send the request to the target server and log the response.
 		resp, err := http.DefaultClient.Do(r)
 		if err != nil {
-			log.Println("error sending request to target:", err)
+			log.Println("error sending request to target:", r.URL.String(), err)
 			break
 		}
 		// log.Println("target response for:", r.Method, r.Host, r.URL.String(), resp.Status)
@@ -250,7 +250,7 @@ func (p *mitmProxy) proxyConnect(w http.ResponseWriter, proxyReq *http.Request) 
 
 		// Send the target server's response back to the client.
 		if err := resp.Write(tlsConn); err != nil {
-			log.Println("error writing response back:", err)
+			log.Println("error writing response back:", r.URL.String(), err)
 			return
 		}
 	}
