@@ -7,7 +7,7 @@ require (
 	github.com/pkg/sftp v1.13.5
 	github.com/usedbytes/hsv v0.0.0-20170730102510-c0565042a95a
 	golang.design/x/clipboard v0.6.3
-	golang.org/x/crypto v0.6.0
+	golang.org/x/crypto v0.14.0
 	gopkg.in/src-d/go-git.v4 v4.13.1
 )
 
@@ -24,8 +24,8 @@ require (
 	golang.org/x/exp v0.0.0-20190731235908-ec7cb31e5a56 // indirect
 	golang.org/x/image v0.0.0-20211028202545-6944b10bf410 // indirect
 	golang.org/x/mobile v0.0.0-20210716004757-34ab1303b554 // indirect
-	golang.org/x/net v0.6.0 // indirect
-	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/net v0.17.0 // indirect
+	golang.org/x/sys v0.13.0 // indirect
 	gopkg.in/src-d/go-billy.v4 v4.3.2 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
