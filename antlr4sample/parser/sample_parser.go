@@ -1,62 +1,82 @@
-// Code generated from c:\git\src\github.com\lercher\gotools\antlr4sample\Sample.g by ANTLR 4.9.2. DO NOT EDIT.
+// Code generated from c://git//src//github.com//lercher//gotools//antlr4sample//Sample.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
 package parser // Sample
 
 import (
 	"fmt"
-	"reflect"
 	"strconv"
+	"sync"
 
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/antlr4-go/antlr/v4"
 )
 
 // Suppress unused import errors
 var _ = fmt.Printf
-var _ = reflect.Copy
 var _ = strconv.Itoa
-
-var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 6, 10, 4,
-	2, 9, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 8, 2,
-	4, 3, 2, 2, 2, 4, 5, 7, 3, 2, 2, 5, 6, 7, 4, 2, 2, 6, 7, 7, 5, 2, 2, 7,
-	8, 7, 2, 2, 3, 8, 3, 3, 2, 2, 2, 2,
-}
-var literalNames = []string{
-	"", "'Sample'", "", "'.'",
-}
-var symbolicNames = []string{
-	"", "SAMPLE", "INT", "DOT", "WS",
-}
-
-var ruleNames = []string{
-	"main",
-}
+var _ = sync.Once{}
 
 type SampleParser struct {
 	*antlr.BaseParser
 }
 
-// NewSampleParser produces a new parser instance for the optional input antlr.TokenStream.
-//
-// The *SampleParser instance produced may be reused by calling the SetInputStream method.
-// The initial parser configuration is expensive to construct, and the object is not thread-safe;
-// however, if used within a Golang sync.Pool, the construction cost amortizes well and the
-// objects can be used in a thread-safe manner.
-func NewSampleParser(input antlr.TokenStream) *SampleParser {
-	this := new(SampleParser)
-	deserializer := antlr.NewATNDeserializer(nil)
-	deserializedATN := deserializer.DeserializeFromUInt16(parserATN)
-	decisionToDFA := make([]*antlr.DFA, len(deserializedATN.DecisionToState))
-	for index, ds := range deserializedATN.DecisionToState {
-		decisionToDFA[index] = antlr.NewDFA(ds, index)
-	}
-	this.BaseParser = antlr.NewBaseParser(input)
+var SampleParserStaticData struct {
+	once                   sync.Once
+	serializedATN          []int32
+	LiteralNames           []string
+	SymbolicNames          []string
+	RuleNames              []string
+	PredictionContextCache *antlr.PredictionContextCache
+	atn                    *antlr.ATN
+	decisionToDFA          []*antlr.DFA
+}
 
-	this.Interpreter = antlr.NewParserATNSimulator(this, deserializedATN, decisionToDFA, antlr.NewPredictionContextCache())
-	this.RuleNames = ruleNames
-	this.LiteralNames = literalNames
-	this.SymbolicNames = symbolicNames
-	this.GrammarFileName = "Sample.g"
+func sampleParserInit() {
+	staticData := &SampleParserStaticData
+	staticData.LiteralNames = []string{
+		"", "'Sample'", "", "'.'",
+	}
+	staticData.SymbolicNames = []string{
+		"", "SAMPLE", "INT", "DOT", "WS",
+	}
+	staticData.RuleNames = []string{
+		"main",
+	}
+	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
+	staticData.serializedATN = []int32{
+		4, 1, 4, 8, 2, 0, 7, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0,
+		0, 0, 6, 0, 2, 1, 0, 0, 0, 2, 3, 5, 1, 0, 0, 3, 4, 5, 2, 0, 0, 4, 5, 5,
+		3, 0, 0, 5, 6, 5, 0, 0, 1, 6, 1, 1, 0, 0, 0, 0,
+	}
+	deserializer := antlr.NewATNDeserializer(nil)
+	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
+	atn := staticData.atn
+	staticData.decisionToDFA = make([]*antlr.DFA, len(atn.DecisionToState))
+	decisionToDFA := staticData.decisionToDFA
+	for index, state := range atn.DecisionToState {
+		decisionToDFA[index] = antlr.NewDFA(state, index)
+	}
+}
+
+// SampleParserInit initializes any static state used to implement SampleParser. By default the
+// static state used to implement the parser is lazily initialized during the first call to
+// NewSampleParser(). You can call this function if you wish to initialize the static state ahead
+// of time.
+func SampleParserInit() {
+	staticData := &SampleParserStaticData
+	staticData.once.Do(sampleParserInit)
+}
+
+// NewSampleParser produces a new parser instance for the optional input antlr.TokenStream.
+func NewSampleParser(input antlr.TokenStream) *SampleParser {
+	SampleParserInit()
+	this := new(SampleParser)
+	this.BaseParser = antlr.NewBaseParser(input)
+	staticData := &SampleParserStaticData
+	this.Interpreter = antlr.NewParserATNSimulator(this, staticData.atn, staticData.decisionToDFA, staticData.PredictionContextCache)
+	this.RuleNames = staticData.RuleNames
+	this.LiteralNames = staticData.LiteralNames
+	this.SymbolicNames = staticData.SymbolicNames
+	this.GrammarFileName = "Sample.g4"
 
 	return this
 }
@@ -86,21 +106,32 @@ type IMainContext interface {
 	// SetSamplenum sets the samplenum token.
 	SetSamplenum(antlr.Token)
 
+	// Getter signatures
+	SAMPLE() antlr.TerminalNode
+	DOT() antlr.TerminalNode
+	EOF() antlr.TerminalNode
+	INT() antlr.TerminalNode
+
 	// IsMainContext differentiates from other interfaces.
 	IsMainContext()
 }
 
 type MainContext struct {
-	*antlr.BaseParserRuleContext
+	antlr.BaseParserRuleContext
 	parser    antlr.Parser
 	samplenum antlr.Token
 }
 
 func NewEmptyMainContext() *MainContext {
 	var p = new(MainContext)
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
 	p.RuleIndex = SampleParserRULE_main
 	return p
+}
+
+func InitEmptyMainContext(p *MainContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = SampleParserRULE_main
 }
 
 func (*MainContext) IsMainContext() {}
@@ -108,7 +139,7 @@ func (*MainContext) IsMainContext() {}
 func NewMainContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *MainContext {
 	var p = new(MainContext)
 
-	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
 
 	p.parser = parser
 	p.RuleIndex = SampleParserRULE_main
@@ -161,27 +192,14 @@ func (s *MainContext) ExitRule(listener antlr.ParseTreeListener) {
 func (p *SampleParser) Main() (localctx IMainContext) {
 	localctx = NewMainContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 0, SampleParserRULE_main)
-
-	defer func() {
-		p.ExitRule()
-	}()
-
-	defer func() {
-		if err := recover(); err != nil {
-			if v, ok := err.(antlr.RecognitionException); ok {
-				localctx.SetException(v)
-				p.GetErrorHandler().ReportError(p, v)
-				p.GetErrorHandler().Recover(p, v)
-			} else {
-				panic(err)
-			}
-		}
-	}()
-
 	p.EnterOuterAlt(localctx, 1)
 	{
 		p.SetState(2)
 		p.Match(SampleParserSAMPLE)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
 	}
 	{
 		p.SetState(3)
@@ -189,15 +207,37 @@ func (p *SampleParser) Main() (localctx IMainContext) {
 		var _m = p.Match(SampleParserINT)
 
 		localctx.(*MainContext).samplenum = _m
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
 	}
 	{
 		p.SetState(4)
 		p.Match(SampleParserDOT)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
 	}
 	{
 		p.SetState(5)
 		p.Match(SampleParserEOF)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
 	}
 
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.ExitRule()
 	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
 }

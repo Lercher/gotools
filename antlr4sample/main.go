@@ -9,7 +9,7 @@ import (
 	"os"
 
 	"github.com/lercher/gotools/antlr4sample/parser"
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+	"github.com/antlr4-go/antlr/v4"
 )
 
 type sampleListener struct {

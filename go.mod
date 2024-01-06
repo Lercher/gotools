@@ -1,7 +1,7 @@
 module github.com/lercher/gotools
 
 require (
-	github.com/antlr/antlr4 v0.0.0-20210311221813-5e5b6d35b418
+	github.com/antlr4-go/antlr/v4 v4.13.0
 	github.com/go-stomp/stomp v2.1.4+incompatible
 	github.com/nsqio/go-nsq v1.1.0
 	github.com/pkg/sftp v1.13.5
@@ -21,11 +21,12 @@ require (
 	github.com/sergi/go-diff v1.0.0 // indirect
 	github.com/src-d/gcfg v1.4.0 // indirect
 	github.com/xanzy/ssh-agent v0.2.1 // indirect
-	golang.org/x/exp v0.0.0-20190731235908-ec7cb31e5a56 // indirect
-	golang.org/x/image v0.10.0 // indirect
-	golang.org/x/mobile v0.0.0-20210716004757-34ab1303b554 // indirect
+	golang.org/x/exp v0.0.0-20230515195305-f3d0a9c9a5cc // indirect
+	golang.org/x/exp/shiny v0.0.0-20240103183307-be819d1f06fc // indirect
+	golang.org/x/image v0.14.0 // indirect
+	golang.org/x/mobile v0.0.0-20231127183840-76ac6878050a // indirect
 	golang.org/x/net v0.17.0 // indirect
-	golang.org/x/sys v0.13.0 // indirect
+	golang.org/x/sys v0.15.0 // indirect
 	gopkg.in/src-d/go-billy.v4 v4.3.2 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
