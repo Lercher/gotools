@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/lercher/gotools/antlr4sample/parser"
 	"github.com/antlr4-go/antlr/v4"
+	"github.com/lercher/gotools/antlr4sample/parser"
 )
 
 type sampleListener struct {

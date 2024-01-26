@@ -13,7 +13,7 @@ func (t *transform) keepAspectRatio() {
 }
 
 func (t *transform) tr(x, y float64) (int, int, bool) {
-	ix, okx := t.x.tr(x) 
-	iy, oky := t.y.tr(y) 
+	ix, okx := t.x.tr(x)
+	iy, oky := t.y.tr(y)
 	return ix, iy, okx && oky
 }

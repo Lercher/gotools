@@ -59,7 +59,7 @@ func (e *Environment) FuncMap() template.FuncMap {
 				label,
 				name,
 			}
-			e.BoundValue[name] = bv 
+			e.BoundValue[name] = bv
 			return bv
 		},
 	}
@@ -74,7 +74,7 @@ type BoundValue struct {
 	Name     Name
 }
 
-// Value returns the Property of the dot 
+// Value returns the Property of the dot
 func (b *BoundValue) Value() interface{} {
 	switch dot := b.dot.(type) {
 	case map[string]interface{}:
@@ -88,8 +88,8 @@ func (b *BoundValue) Value() interface{} {
 func (b *BoundValue) Put(value interface{}) error {
 	switch dot := b.dot.(type) {
 	case map[string]interface{}:
-		 dot[b.Property] = value
-		 return nil
+		dot[b.Property] = value
+		return nil
 	default:
 		return fmt.Errorf("put: %q is not a property of %v", b.Property, b.dot)
 	}

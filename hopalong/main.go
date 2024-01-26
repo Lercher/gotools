@@ -24,7 +24,7 @@ func main() {
 	log.Println("This is HopAlong, (c) 2018 by Martin Lercher")
 	flag.Parse()
 
-	if *flagFunc <0 || len(hopfuncs) <= *flagFunc {
+	if *flagFunc < 0 || len(hopfuncs) <= *flagFunc {
 		log.Fatalln("-f", *flagFunc, "out of range")
 	}
 
@@ -42,6 +42,6 @@ func main() {
 		defer f.Close()
 		o = f
 	}
-	h := hopPNG(o,*flagFunc, *flagWidth, *flagHeight, *flagRounds, *flagNextColor, *flagQ1)
+	h := hopPNG(o, *flagFunc, *flagWidth, *flagHeight, *flagRounds, *flagNextColor, *flagQ1)
 	log.Printf("A%v B%v C%v D%v, box: x%v y%v", h.a, h.b, h.c, h.d, h.box.x, h.box.y)
 }

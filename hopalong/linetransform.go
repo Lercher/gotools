@@ -9,5 +9,5 @@ type linetransform struct {
 
 func (t *linetransform) tr(val float64) (int, bool) {
 	i := int(math.Floor((val + t.offset) * t.factor))
-	return i, 0<=i && i<t.max
+	return i, 0 <= i && i < t.max
 }

@@ -245,7 +245,7 @@ func (p *mitmProxy) proxyConnect(w http.ResponseWriter, proxyReq *http.Request) 
 		// if b, err := httputil.DumpResponse(resp, false); err == nil {
 		//	log.Printf("target response:\n%s\n", string(b))
 		// }
-		p.proc.send(r, resp)		
+		p.proc.send(r, resp)
 		defer resp.Body.Close()
 
 		// Send the target server's response back to the client.

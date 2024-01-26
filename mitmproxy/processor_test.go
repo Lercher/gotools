@@ -30,7 +30,7 @@ func Test_processor_fm2(t *testing.T) {
 
 func Test_processor_foldernPath(t *testing.T) {
 	have := "/webtoon/life-0003/chapter-2/"
-	want := "life-0003/chapter-2"	
+	want := "life-0003/chapter-2"
 	got := foldernPath(have, 2)
 	if got != want {
 		t.Errorf("foldernPath(%v, 2): want %v, got %v", have, want, got)
@@ -39,7 +39,7 @@ func Test_processor_foldernPath(t *testing.T) {
 
 func Test_processor_foldernPath2(t *testing.T) {
 	have := "/webtoon/life-0003/chapter-2"
-	want := "life-0003/chapter-2"	
+	want := "life-0003/chapter-2"
 	got := foldernPath(have, 2)
 	if got != want {
 		t.Errorf("foldernPath(%v, 2): want %v, got %v", have, want, got)

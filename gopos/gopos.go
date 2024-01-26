@@ -81,7 +81,7 @@ func main() {
 	cs := newContexts()
 
 	for i := 0; i < 10; i++ {
-		i:=i
+		i := i
 		ctx1 := cs.Get("1")
 		go p(&cs, ctx1, "ctx1")
 

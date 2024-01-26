@@ -112,7 +112,7 @@ func sgn(i, j int) int {
 }
 
 func toHSV(i int) color.Color {
-	return hsv.HSVColor{H: uint16((i>>3) % 360), S: 255, V: 255}
+	return hsv.HSVColor{H: uint16((i >> 3) % 360), S: 255, V: 255}
 }
 
 func (m modul) iterate(h handler) {

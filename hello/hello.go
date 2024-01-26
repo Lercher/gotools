@@ -14,10 +14,10 @@ func server() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/foo/", func(w http.ResponseWriter, r *http.Request) {
 		// http://localhost:8080/foo/something?q=1&s=2
-		fmt.Fprintf(w, 
-			"/foo/* handler here, %q, query %q, q=%q s=%q", 
-			html.EscapeString(r.URL.Path), 
-			html.EscapeString(r.URL.RawQuery), 
+		fmt.Fprintf(w,
+			"/foo/* handler here, %q, query %q, q=%q s=%q",
+			html.EscapeString(r.URL.Path),
+			html.EscapeString(r.URL.RawQuery),
 			html.EscapeString(r.URL.Query()["q"][0]),
 			html.EscapeString(r.URL.Query()["s"][0]),
 		)

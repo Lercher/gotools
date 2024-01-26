@@ -17,7 +17,7 @@ func ellPNG(wr io.Writer, w float64, steps int, epsilon float64) error {
 }
 
 func imgwalk(img *image.NRGBA, w float64, steps int, epsilon float64) {
-	czo := hsv.HSVColor{H: 15, S: 150, V: 40}   // H: uint16(0..359)
+	czo := hsv.HSVColor{H: 15, S: 150, V: 40} // H: uint16(0..359)
 	walk00(w, steps, epsilon, func(i, j int, _, _, v float64, isZero bool) {
 		if isZero {
 			img.Set(i, j, czo)

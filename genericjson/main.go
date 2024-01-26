@@ -29,7 +29,7 @@ func main() {
 
 	templatename := os.Args[1]
 	var e *Environment
-	rawtpl := template.Must(template.New("").Funcs(e.FuncMap()).ParseFiles(templatename)) 
+	rawtpl := template.Must(template.New("").Funcs(e.FuncMap()).ParseFiles(templatename))
 	log.Println("Loaded template", templatename, rawtpl.DefinedTemplates())
 
 	e = NewEnvironment()
@@ -57,4 +57,3 @@ func main() {
 	}
 	log.Println(m)
 }
-

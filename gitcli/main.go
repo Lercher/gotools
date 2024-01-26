@@ -1,16 +1,14 @@
 package main
 
 import (
-	_ "fmt"
 	"log"
-	"path/filepath"
-	"io/ioutil"
 	"os"
+	"path/filepath"
 
-	"gopkg.in/src-d/go-git.v4"
-	"gopkg.in/src-d/go-git.v4/plumbing/transport/ssh"
+	"github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/plumbing/transport/ssh"
 
-	cryptossh  "golang.org/x/crypto/ssh"
+	cryptossh "golang.org/x/crypto/ssh"
 )
 
 func main() {
@@ -39,7 +37,7 @@ func main() {
 	// https://github.com/wstrange at https://github.com/src-d/go-git/issues/550#issuecomment-323182885
 	//
 	s := filepath.Join(os.Getenv("USERPROFILE"), ".ssh", "id_rsa")
-	sshKey, err := ioutil.ReadFile(s)
+	sshKey, err := os.ReadFile(s)
 	if err != nil {
 		log.Fatalf("readfile: %v", err)
 	}
