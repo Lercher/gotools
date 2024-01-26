@@ -7,7 +7,7 @@ require (
 	github.com/pkg/sftp v1.13.5
 	github.com/usedbytes/hsv v0.0.0-20170730102510-c0565042a95a
 	golang.design/x/clipboard v0.6.3
-	golang.org/x/crypto v0.14.0
+	golang.org/x/crypto v0.17.0
 	gopkg.in/src-d/go-git.v4 v4.13.1
 )
 
