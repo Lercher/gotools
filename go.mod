@@ -8,7 +8,7 @@ require (
 	github.com/pkg/sftp v1.13.6
 	github.com/usedbytes/hsv v0.0.0-20170730102510-c0565042a95a
 	golang.design/x/clipboard v0.7.0
-	golang.org/x/crypto v0.21.0
+	golang.org/x/crypto v0.31.0
 )
 
 require (
@@ -35,7 +35,7 @@ require (
 	golang.org/x/mobile v0.0.0-20231127183840-76ac6878050a // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/net v0.23.0 // indirect
-	golang.org/x/sys v0.18.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/tools v0.16.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
