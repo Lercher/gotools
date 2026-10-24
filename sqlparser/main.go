@@ -40,6 +40,8 @@ func main() {
         select 1 from dbo.TableValuedFunction('p1', 2, -5);
     ROLLBACK;
     `
+
+    input = "SELECT name as [short name without middle initial], long_name FROM users;"
     
     program, errors := tsqlparser.Parse(input)
     if len(errors) > 0 {
@@ -50,7 +52,13 @@ func main() {
     }
     
     for i, stmt := range program.Statements {
-        fmt.Printf("Statement %d: %s\n", i+1, stmt.String())
+        fmt.Printf("statement %d %+T: %s\n", i+1, stmt, stmt.String())
+        switch s := stmt.(type) {
+        case *tsqlparser.SelectStatement:
+            for j, col := range s.Columns {
+                fmt.Printf("  column %d: %+T alias=%q expression=%q\n", j+1, col, col.Alias, col.Expression.String())
+            }
+        }
     }
 }
 
